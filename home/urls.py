@@ -3,5 +3,5 @@ from . import views
 
 
 urlpatterns =[
-    path('', views.index_page)
+    path('', views.todos_json)
 ]
