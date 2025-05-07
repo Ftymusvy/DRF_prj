@@ -1,6 +1,9 @@
-from django.urls import path
+from django.urls import path , include
 from . import views
+from rest_framework.routers import DefaultRouter
 
+router = DefaultRouter()
+router.register('' , views.TodosViewSetApiView)
 
 
 urlpatterns =[
@@ -13,5 +16,6 @@ urlpatterns =[
     path('mixins/<pk>', views.TodosDetailMixinApiView.as_view()),
     path('generics/', views.TodosGenericApiView.as_view()),
     path('generics/<pk>', views.TodosGenericDetailApiView.as_view()),
+    path('viewsets/', include(router.urls)),
 
 ]
