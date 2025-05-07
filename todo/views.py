@@ -7,6 +7,12 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework import mixins ,generics , viewsets
+
+
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import BasicAuthentication
+
+
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -132,10 +138,14 @@ class TodosDetailMixinApiView(generics.RetrieveAPIView ,generics.UpdateAPIView,g
 class TodosGenericApiView(generics.ListCreateAPIView):
     queryset = Todo.objects.order_by('priority').all()
     serializer_class = TodoSerializer
+    authentication_classes = [BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+
+
 class TodosGenericDetailApiView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Todo.objects.order_by('priority').all()
     serializer_class = TodoSerializer
-
+    
 
 #endregion
 
