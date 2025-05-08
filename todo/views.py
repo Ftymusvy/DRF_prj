@@ -138,8 +138,9 @@ class TodosDetailMixinApiView(generics.RetrieveAPIView ,generics.UpdateAPIView,g
 class TodosGenericApiView(generics.ListCreateAPIView):
     queryset = Todo.objects.order_by('priority').all()
     serializer_class = TodoSerializer
-    authentication_classes = [BasicAuthentication]
-    permission_classes = [IsAuthenticated]
+   # authentication_classes = [BasicAuthentication]
+   # permission_classes = [IsAuthenticated]
+
 
 
 class TodosGenericDetailApiView(generics.RetrieveUpdateDestroyAPIView):
