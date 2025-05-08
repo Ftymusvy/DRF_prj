@@ -11,7 +11,7 @@ from rest_framework import mixins ,generics , viewsets
 
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import BasicAuthentication
-
+from drf_spectacular.utils import extend_schema
 
 from django.contrib.auth import get_user_model
 
@@ -61,6 +61,11 @@ def todo_detail_view(request: Request , todo_id:int):
 #region class base view
 
 class TodosListApiView(APIView):
+      @extend_schema(
+        request=TodoSerializer,
+        responses={201: TodoSerializer},
+        description='this api is used for get all api todos list'
+    )
       def get(self, request:Request):
             todos = Todo.objects.order_by('priority').all()
             todo_serializer = TodoSerializer(todos , many=True)
